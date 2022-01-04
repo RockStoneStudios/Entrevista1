@@ -1,0 +1,178 @@
+openapi: 3.0.0
+swagger: "2.0"
+info:
+ title : API entrevista
+ description : CRUD de usuarios
+ version: 1.0.0
+servers :
+ - url : http://localhost:3000
+tags: usuarios
+ 
+paths:
+ /upload
+post:
+   tags:
+   - usuarios
+   summary : Inserta la informacion del nuevo usuario
+   responses:
+        '200':
+          description: Operacion Exitosa.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioInfo'
+        '400':
+          description: Error.
+        /
+      get:
+      tags:
+        - Usuarios
+      summary: Obtener listado de todos los usuarios 
+      description: Obtiene todos los usuarios si el usuario que hace el request es admin 
+      
+      responses:
+        '200':
+          description: Operacion Exitosa.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioInfo'
+        '400':
+          description: Error.
+          
+          
+        /image/:{id}:
+        get:
+         tags:
+          - Usuarios
+              summary: Obtiene usuario por id de Usuario solo
+             description: Obtener usuario
+      
+      parameters:
+        - name: Usuario
+          in: path
+          description: Busqueda Especifica de Usuario.
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsuarioInfo"
+        400:
+          description: No se encontro usuario.
+          
+image/{id}/delete:
+delete:
+      tags:
+        - Usuarios
+      summary: Borrar cuenta de usuarios 
+ 
+      responses:
+        200:
+          description: Usuario borrado con exito
+     
+        400:
+          description: No se encontro usuario
+          
+       /update/{id}:
+put:
+      tags:
+        - Usuarios
+      summary: Editar datos de usuario 
+      description: Modifica datos en las cuentas de los usuarios.
+
+      requestBody:
+        description: Actualizacion de los datos
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Usuario"
+      responses:
+        200:
+          description: Usuario modificado correctamente
+     
+        400:
+          description: No se encontro usuario    
+          
+          
+          
+    
+components:
+  schemas:
+    Usuario:
+      type: object
+      properties:
+        
+        nombre:
+          type: string
+          example: Omar
+        apellido:
+          type: string
+          example: Ortiz Jimenez
+        correo:
+          type: string
+          example: omarortiz@gmail.com
+        tipo_documento:
+          type: string
+          example: 549112001
+        documento_identidad:
+          type: number
+          example: 41000201
+        celular:
+          type: string,
+          example: +57 3102020231
+        fecha:
+          type: string
+          example : 21/04/1992
+          
+        filename:
+          type: string
+          example : elon.png
+          
+          
+    UsuarioInfo:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            example: 1
+         
+          nombre:
+            type: string
+            example: Omar
+          apellido:
+            type: string
+            example: Ortiz Jimenez
+          correo:
+            type: string
+            example: RockStoneStudios666@gmail.com
+          tipo_documento:
+            type: string
+            example: cc
+           documento_identidad:
+            type: number
+            example: 10000210
+          celular:
+            type: string
+            example:+57312000201
+          fecha:
+            type: string
+            example: 21/12/1889
+            
+          filename:
+            type: string
+            example: elon.png  
+          
+          
+          
+          
+          
+          
+          
+          
